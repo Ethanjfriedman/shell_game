@@ -1,16 +1,13 @@
 body {
   margin-left: 300px;
   background-image: url("timessqcrop.jpg");
-  background-position: 200px 200px center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hidden {
   display: none;
 }
-/*
-h1 {
-  font-size: 3em;
-}*/
 
 #info {
   width: 600px;
@@ -19,6 +16,7 @@ h1 {
   color: yellow;;
   font-weight: bold;
   font-size: 2em;
+  text-shadow: 3px 3px black;
 }
 
 #gameboard {
@@ -26,67 +24,49 @@ h1 {
   height: 250px;
   background-color: green;
   border-radius: 20px;
+  box-shadow: 5px 5px black;
 }
 
 .card {
   position: absolute;
-  transition: left 1s ease;
+  transition-property: left;
+  transition-duration: 0.8s;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   height: 80px;
   width: 50px;
   background-color: red;
   padding: 10px;
   box-shadow: 4px 4px black;
   background-image: url(cardback280x100.jpg);
+  border-radius: 5px;
+  top: 320px;
 }
 
 #left {
   left: 365px;
-  top: 320px;
 }
 
 #center {
   left: 565px;
-  top: 320px;
 }
 
 #right {
   left: 765px;
-  top: 320px;
 }
-
-/*#ball {
-  background-color: blue;
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
-  position: relative;
-  left: 10px;
-  top: 27.5px;
-  display: inline-block;
-  transition: display 1s ease;
-}*/
 
 #ball {
   display: inline-block;
   position: relative;
-  left: 10px;
-  top: 25px;
-  /*left:-150px;
-  top: -400px;*/
-  transition: left 1s ease;
-  transition: top 1s ease;
+  left: 5px;
+  top: 20px;
   background: #5cabff;
   border-radius: 50%;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   margin: 0;
   background: radial-gradient(circle at 30px 30px, #5cabff, #000);
 }
 
-#ball.active {
-  left: 10px
-  top: 25px;
-}
 #ball.hidden {
   display: none;
 }
@@ -104,3 +84,61 @@ button {
   font-size: 2em;
   border-radius: 3px;
 }
+
+footer {
+  font-size: 1em;
+  margin-left: 70%;
+  color: yellow;
+  font-weight: bold;
+  text-shadow: 3px 3px black;
+}
+
+/*BELOW THIS IS EXPERIMENTAL CODE FOR A BOUNCING BALL ON WINDOW LOAD*/
+
+@keyframes travel {
+  from { left: 0px    }
+  to   { left: 640px; }
+}
+
+@keyframes bounce {
+  from, to  {
+    bottom: 0;
+    animation-timing-function: ease-out;
+  }
+    50% {
+      bottom: 220px;
+      animation-timing-function: ease-in;
+    }
+  }
+
+  #stage {
+    position: relative;
+    margin: 1em auto;
+    width: 660px;
+    height: 240px;
+    border: none;
+    background: none;
+  }
+  #traveler {
+    position: absolute;
+    width: 20px;
+    height: 240px;
+
+    animation-name: travel;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-duration: 4.8s;
+  }
+
+  #bouncer {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #5cabff;
+    border-radius: 25px;
+    animation-name: bounce;
+    animation-iteration-count: infinite;
+    animation-duration: 4.2s;
+    background: radial-gradient(circle at 30px 30px, #5cabff, #000);
+  }
